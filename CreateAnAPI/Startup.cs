@@ -23,8 +23,11 @@ namespace CreateAnAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoDbContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<TodoDbContext>(options =>
+            {
+                //options.UseSqlServer(Configuration["ConnectionStrings:ProductionDB"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+            });
             services.AddMvc().AddXmlDataContractSerializerFormatters();
         }
 

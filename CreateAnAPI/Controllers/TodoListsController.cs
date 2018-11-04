@@ -12,7 +12,7 @@ namespace CreateAnAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodoListsController : ControllerBase
+    public class TodoListsController : Controller
     {
         private readonly TodoDbContext _context;
 

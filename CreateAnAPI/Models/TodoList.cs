@@ -10,6 +10,6 @@ namespace CreateAnAPI.Models
     {
         public int ID { get; set; }
         public string ListTitle { get; set; }
-        public Todo Todoes { get; set; }
+        public List<Todo> Todoes { get; set; }
     }
 }
