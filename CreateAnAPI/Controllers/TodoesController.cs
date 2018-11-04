@@ -20,14 +20,21 @@ namespace CreateAnAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Todoes
+        /// <summary>
+        /// Gets all Todos
+        /// </summary>
+        /// <returns>Returns Todos</returns>
         [HttpGet]
         public IEnumerable<Todo> GetTodos()
         {
             return _context.Todos;
         }
 
-        // GET: api/Todoes/5
+        /// <summary>
+        /// Gets specific Todo
+        /// </summary>
+        /// <param name="id">Todo ID</param>
+        /// <returns>Returns Todo</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTodo([FromRoute] int id)
         {
@@ -46,7 +53,12 @@ namespace CreateAnAPI.Controllers
             return Ok(todo);
         }
 
-        // PUT: api/Todoes/5
+        /// <summary>
+        /// Updates Todo
+        /// </summary>
+        /// <param name="id">Todo ID</param>
+        /// <param name="todo">Todo Update information</param>
+        /// <returns>Returns nothing</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodo([FromRoute] int id, [FromBody] Todo todo)
         {
@@ -81,7 +93,11 @@ namespace CreateAnAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Todoes
+        /// <summary>
+        /// Creates a Todo
+        /// </summary>
+        /// <param name="todo">Todo to be Created</param>
+        /// <returns>Returns Todo that was Created</returns>
         [HttpPost]
         public async Task<IActionResult> PostTodo([FromBody] Todo todo)
         {
@@ -96,7 +112,11 @@ namespace CreateAnAPI.Controllers
             return CreatedAtAction("GetTodo", new { id = todo.ID }, todo);
         }
 
-        // DELETE: api/Todoes/5
+        /// <summary>
+        /// Deletes a Todo
+        /// </summary>
+        /// <param name="id">Todo ID</param>
+        /// <returns>Returns Ok</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodo([FromRoute] int id)
         {

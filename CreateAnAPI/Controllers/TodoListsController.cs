@@ -21,14 +21,21 @@ namespace CreateAnAPI.Controllers
             _context = context;
         }
 
-        // GET: api/TodoLists
+        /// <summary>
+        /// Gets all TodoLists
+        /// </summary>
+        /// <returns>Returns all Todo Lists</returns>
         [HttpGet]
         public IEnumerable<TodoList> GetTodoLists()
         {
             return _context.TodoLists;
         }
 
-        // GET: api/TodoLists/5
+        /// <summary>
+        /// Gets a specific TodoList
+        /// </summary>
+        /// <param name="id">TodoList ID</param>
+        /// <returns>Returns TodoList</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTodoList([FromRoute] int id)
         {
@@ -47,7 +54,12 @@ namespace CreateAnAPI.Controllers
             return Ok(todoList);
         }
 
-        // PUT: api/TodoLists/5
+        /// <summary>
+        /// Updates TodoList
+        /// </summary>
+        /// <param name="id">TodoList ID</param>
+        /// <param name="todoList">Updated TodoList</param>
+        /// <returns>Returns nothing</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoList([FromRoute] int id, [FromBody] TodoList todoList)
         {
@@ -82,7 +94,11 @@ namespace CreateAnAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/TodoLists
+        /// <summary>
+        /// Creates a TodoList
+        /// </summary>
+        /// <param name="todoList">TodoList to be Created</param>
+        /// <returns>Returns TodoList that was Created</returns>
         [HttpPost]
         public async Task<IActionResult> PostTodoList([FromBody] TodoList todoList)
         {
@@ -97,7 +113,11 @@ namespace CreateAnAPI.Controllers
             return CreatedAtAction("GetTodoList", new { id = todoList.ID }, todoList);
         }
 
-        // DELETE: api/TodoLists/5
+        /// <summary>
+        /// Deletes TodoList
+        /// </summary>
+        /// <param name="id">TodoList ID</param>
+        /// <returns>Returns Ok</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoList([FromRoute] int id)
         {

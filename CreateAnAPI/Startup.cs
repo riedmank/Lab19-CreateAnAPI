@@ -19,19 +19,25 @@ namespace CreateAnAPI
         {
             Configuration = configuration;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
+        /// <summary>
+        /// Configures Services used by API
+        /// </summary>
+        /// <param name="services">Services</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoDbContext>(options =>
             {
-                //options.UseSqlServer(Configuration["ConnectionStrings:ProductionDB"]);
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:ProductionDB"]);
             });
             services.AddMvc().AddXmlDataContractSerializerFormatters();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures HTTP request pipeline
+        /// </summary>
+        /// <param name="app">Applications used by program</param>
+        /// <param name="env">Environmental Variables</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
