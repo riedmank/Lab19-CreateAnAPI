@@ -10,3 +10,6 @@ No visuals because it is an API.  There are no views to see.  Use Postman to mak
 2. Open the Solution file
 3. Run IIS Express
 4. Use Postman to make requests to the API
+
+## Deployment Link
+https://codefellowsapilab.azurewebsites.net
