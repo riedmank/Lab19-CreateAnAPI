@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NJsonSchema;
+using NSwag.AspNetCore;
+using System.Reflection;
 
 namespace CreateAnAPI
 {
@@ -29,8 +32,10 @@ namespace CreateAnAPI
             services.AddDbContext<TodoDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:ProductionDB"]);
+                //options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
             });
             services.AddMvc().AddXmlDataContractSerializerFormatters();
+            services.AddSwagger();
         }
 
         /// <summary>
@@ -45,6 +50,12 @@ namespace CreateAnAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwaggerUi3WithApiExplorer(settings =>
+            {
+                settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+            });
+
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
