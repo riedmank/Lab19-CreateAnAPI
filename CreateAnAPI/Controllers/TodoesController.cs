@@ -27,7 +27,8 @@ namespace CreateAnAPI.Controllers
         [HttpGet]
         public IEnumerable<Todo> GetTodos()
         {
-            return _context.Todos;
+            var result = _context.Todos;
+            return result;
         }
 
         /// <summary>

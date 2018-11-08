@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CreateAnAPI.Models;
+using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
 
 namespace CreateAnAPI.Data
@@ -10,5 +10,7 @@ namespace CreateAnAPI.Data
         public int ID { get; set; }
         public string Title { get; set; }
         public bool IsDone { get; set; }
+
+        public int TodoListID { get; set; }
     }
 }

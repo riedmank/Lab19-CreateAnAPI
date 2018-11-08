@@ -28,6 +28,8 @@ namespace CreateAnAPI.Controllers
         [HttpGet]
         public IEnumerable<TodoList> GetTodoLists()
         {
+            var item = _context.TodoLists;
+            
             return _context.TodoLists;
         }
 
@@ -37,19 +39,21 @@ namespace CreateAnAPI.Controllers
         /// <param name="id">TodoList ID</param>
         /// <returns>Returns TodoList</returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTodoList([FromRoute] int id)
+        public ActionResult<Todo> GetTodoList([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var todoList = await _context.TodoLists.FindAsync(id);
+            var todoList = _context.TodoLists.FirstOrDefault(x => x.ID == id);
 
             if (todoList == null)
             {
                 return NotFound();
             }
+
+            todoList.Todoes = _context.Todos.Where(t => t.TodoListID == todoList.ID).ToList();
 
             return Ok(todoList);
         }
@@ -107,7 +111,14 @@ namespace CreateAnAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.TodoLists.Add(todoList);
+            await _context.TodoLists.AddAsync(todoList);
+            await _context.SaveChangesAsync();
+
+            foreach (var item in todoList.Todoes)
+            {
+                item.TodoListID = todoList.ID;
+            }
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTodoList", new { id = todoList.ID }, todoList);
